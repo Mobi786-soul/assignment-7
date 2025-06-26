@@ -1,0 +1,91 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Tasks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #todo-list li {
+      margin: 5px 0;
+    }
+    .delete-btn {
+      margin-left: 10px;
+      color: red;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Task 1: DOM Selection -->
+  <h1 id="main-heading">Original Heading</h1>
+  <p class="main-para">This is a paragraph.</p>
+  <button onclick="changeText()">Click Me</button>
+
+  <hr>
+
+  <!-- Task 2: Input and Output -->
+  <h2>Welcome Form</h2>
+  <input type="text" id="name-input" placeholder="Enter your name">
+  <button id="submit-name">Submit</button>
+  <p id="welcome-message"></p>
+
+  <hr>
+
+  <!-- Task 3: Style Manipulation -->
+  <button onclick="changeBackground()">Change Background</button>
+
+  <hr>
+
+  <!-- Task 4: To-Do List App -->
+  <h2>To-Do List</h2>
+  <input type="text" id="task-input" placeholder="Enter a task">
+  <button id="add-task">Add</button>
+  <ul id="todo-list"></ul>
+
+  <script>
+    // Task 1: DOM Selection
+    function changeText() {
+      document.getElementById("main-heading").innerText = "Heading Changed!";
+      document.querySelector(".main-para").innerText = "Paragraph text updated!";
+    }
+
+    // Task 2: Input and Output
+    document.getElementById("submit-name").addEventListener("click", function() {
+      const name = document.getElementById("name-input").value;
+      document.getElementById("welcome-message").innerText = `Welcome, ${name}!`;
+    });
+
+    // Task 3: Style Manipulation
+    function changeBackground() {
+      const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+      document.body.style.backgroundColor = randomColor;
+    }
+
+    // Task 4: To-Do List App
+    document.getElementById("add-task").addEventListener("click", function() {
+      const taskText = document.getElementById("task-input").value;
+      if (taskText.trim() === "") return;
+
+      const li = document.createElement("li");
+      li.innerText = taskText;
+
+      const delBtn = document.createElement("span");
+      delBtn.innerText = "Delete";
+      delBtn.className = "delete-btn";
+      delBtn.onclick = function() {
+        li.remove();
+      };
+
+      li.appendChild(delBtn);
+      document.getElementById("todo-list").appendChild(li);
+
+      document.getElementById("task-input").value = "";
+    });
+  </script>
+
+</body>
+</html>
